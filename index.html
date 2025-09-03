@@ -117,9 +117,9 @@
         }
         
         .spiky-chatbot-btn {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            width: 56px;
+            height: 56px;
+            background: #b47ee5;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -176,11 +176,11 @@
         
         .spiky-chatbot-window {
             position: fixed;
-            bottom: 100px;
+            bottom: 80px; /* Shifted up from 100px */
             right: 20px;
             width: 450px;
             height: 700px;
-            max-height: calc(100vh - 120px);
+            max-height: calc(100vh - 100px); /* Adjusted for new bottom position */
             background: white;
             border-radius: 20px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.3);
@@ -188,6 +188,8 @@
             flex-direction: column;
             overflow: hidden;
             animation: spiky-slide-up 0.3s ease;
+            margin: 0;
+            padding: 0;
         }
         
         @keyframes spiky-slide-up {
@@ -202,12 +204,14 @@
         }
         
         .spiky-chatbot-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #b47ee5;
             color: white;
-            padding: 20px;
+            padding: 25px 20px;
             display: flex;
             align-items: center;
             gap: 15px;
+            margin: 0;
+            min-height: 80px;
         }
         
         .spiky-chatbot-avatar {
@@ -242,6 +246,9 @@
             padding: 5px;
             border-radius: 50%;
             transition: background 0.3s ease;
+            position: absolute;
+            top: 20px;
+            right: 20px;
         }
         
         .spiky-close-btn:hover {
@@ -250,9 +257,108 @@
         
         .spiky-chatbot-messages {
             flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-            background: #f8f9fa;
+            padding: 0;
+            margin: 0;
+            overflow-y: auto; /* Enable scrolling */
+            background: #b47ee5;
+            position: relative;
+            /* Hide scrollbar but keep functionality */
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
+            /* Ensure proper scrolling behavior */
+            scroll-behavior: smooth;
+            /* Remove any potential spacing */
+            line-height: 0;
+            font-size: 0;
+        }
+        
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .spiky-chatbot-messages::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+        
+        .spiky-chatbot-messages::-webkit-scrollbar-track {
+            display: none !important;
+        }
+        
+        .spiky-chatbot-messages::-webkit-scrollbar-thumb {
+            display: none !important;
+        }
+        
+        .spiky-chatbot-messages::-webkit-scrollbar-corner {
+            display: none !important;
+        }
+        
+        /* Ensure iframe has no margins or borders */
+        .spiky-chatbot-messages iframe {
+            border: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            border-radius: 0 !important;
+            outline: none !important;
+            box-sizing: border-box !important;
+            background: #b47ee5 !important;
+        }
+        
+        /* Force remove all margins from chatbot elements */
+        #spiky-chatbot-container,
+        #spiky-chatbot-container *,
+        .spiky-chatbot-window,
+        .spiky-chatbot-window *,
+        .spiky-chatbot-messages,
+        .spiky-chatbot-messages * {
+            margin: 0 !important;
+            padding: 0 !important;
+            box-sizing: border-box !important;
+        }
+        
+        /* Remove white background from chatbot window */
+        .spiky-chatbot-window {
+            background: transparent !important;
+        }
+        
+        /* Remove white background from messages area */
+        .spiky-chatbot-messages {
+            background: transparent !important;
+        }
+        
+        /* Ensure iframe completely fills container with no gaps */
+        .spiky-chatbot-messages iframe {
+            border: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            border-radius: 0 !important;
+            outline: none !important;
+            box-sizing: border-box !important;
+            background: #b47ee5 !important;
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            /* Remove any potential spacing */
+            line-height: 0 !important;
+            font-size: 0 !important;
+        }
+        
+        /* Remove any default margins from the iframe content */
+        .spiky-chatbot-messages iframe body,
+        .spiky-chatbot-messages iframe html {
+            margin: 0 !important;
+            padding: 0 !important;
+            background: transparent !important;
+            line-height: 0 !important;
+            font-size: 0 !important;
+        }
+        
+        /* Additional iframe content spacing removal */
+        .spiky-chatbot-messages iframe * {
+            line-height: 0 !important;
+            font-size: 0 !important;
         }
         
         .spiky-message {
@@ -388,30 +494,55 @@
         /* Responsive Design */
         @media (max-width: 768px) {
             .spiky-chatbot-window {
-                width: 350px;
-                height: 500px;
+                width: 320px;
+                height: 480px;
                 max-height: calc(100vh - 100px);
                 bottom: 90px;
-                right: 15px;
+                right: 25px;
+                border-radius: 14px;
             }
             
             .spiky-chatbot-btn {
-                width: 50px;
-                height: 50px;
+                width: 48px;
+                height: 48px;
             }
             
             .spiky-chatbot-icon {
-                font-size: 20px;
+                font-size: 18px;
+            }
+            
+            .spiky-chatbot-header {
+                padding: 18px 14px;
+                gap: 8px;
+                min-height: 65px;
+            }
+            
+            .spiky-chatbot-avatar {
+                width: 32px;
+                height: 32px;
+                font-size: 14px;
             }
         }
         
         @media (max-width: 480px) {
             .spiky-chatbot-window {
-                width: 320px;
-                height: 450px;
+                width: 300px;
+                height: 420px;
                 max-height: calc(100vh - 80px);
                 bottom: 80px;
-                right: 10px;
+                right: 20px;
+                border-radius: 12px;
+            }
+            
+            .spiky-chatbot-header {
+                padding: 12px 14px;
+                gap: 8px;
+            }
+            
+            .spiky-chatbot-avatar {
+                width: 28px;
+                height: 28px;
+                font-size: 12px;
             }
         }
     </style>
@@ -1595,9 +1726,10 @@
             <div id="spiky-chatbot-messages" class="spiky-chatbot-messages">
                 <iframe 
                     src="https://speicher-4bah.vercel.app/" 
-                    style="width: 100%; height: 100%; border: none; border-radius: 0 0 20px 20px;"
+                    style="width: 100%; height: 100%; border: none; margin: 0; padding: 0; display: block; position: absolute; top: 0; left: 0; right: 0; bottom: 0; outline: none; box-sizing: border-box; background: #b47ee5; line-height: 0; font-size: 0;"
                     allow="microphone; camera"
-                    title="Spiky AI Assistant">
+                    title="Spiky AI Assistant"
+                    frameborder="0">
                 </iframe>
             </div>
         </div>
@@ -1639,14 +1771,187 @@
             const chatbotToggle = document.getElementById('spiky-chatbot-toggle');
             const chatbotWindow = document.getElementById('spiky-chatbot-window');
             const chatbotClose = document.getElementById('spiky-chatbot-close');
+            const chatbotMessages = document.getElementById('spiky-chatbot-messages');
+            const iframe = chatbotMessages.querySelector('iframe');
             
             let isOpen = false;
+            
+            // Function to auto-scroll to bottom
+            function scrollToBottom() {
+                // Try multiple scrolling approaches
+                if (iframe) {
+                    try {
+                        // Method 1: Scroll the iframe element itself
+                        iframe.scrollTop = iframe.scrollHeight;
+                        
+                        // Method 2: Try to scroll the iframe content (may fail due to cross-origin)
+                        if (iframe.contentWindow && iframe.contentWindow.document) {
+                            iframe.contentWindow.scrollTo(0, iframe.contentWindow.document.body.scrollHeight);
+                        }
+                        
+                        // Method 3: Scroll the parent messages container
+                        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                        
+                        // Method 4: Try smooth scrolling
+                        if (iframe.contentWindow) {
+                            iframe.contentWindow.scrollTo({
+                                top: iframe.contentWindow.document.body.scrollHeight,
+                                behavior: 'smooth'
+                            });
+                        }
+                        
+                        // Method 5: Force scroll using postMessage (if iframe supports it)
+                        if (iframe.contentWindow) {
+                            iframe.contentWindow.postMessage({
+                                type: 'scrollToBottom',
+                                scrollTop: iframe.scrollHeight
+                            }, '*');
+                        }
+                        
+                        // Method 6: Use scrollIntoView on the iframe
+                        iframe.scrollIntoView({ behavior: 'smooth', block: 'end' });
+                        
+                    } catch (e) {
+                        // Cross-origin restriction, use alternative methods
+                        iframe.scrollTop = iframe.scrollHeight;
+                        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                        
+                        // Additional fallback: try to scroll the iframe
+                        iframe.scrollTop = iframe.scrollHeight;
+                    }
+                }
+            }
+            
+            // Immediate scroll when iframe loads
+            if (iframe) {
+                iframe.addEventListener('load', function() {
+                    // Instant scroll attempt
+                    scrollToBottom();
+                    
+                    // Multiple immediate scroll attempts with shorter intervals
+                    setTimeout(scrollToBottom, 10);
+                    setTimeout(scrollToBottom, 25);
+                    setTimeout(scrollToBottom, 50);
+                    setTimeout(scrollToBottom, 75);
+                    setTimeout(scrollToBottom, 100);
+                    setTimeout(scrollToBottom, 150);
+                    setTimeout(scrollToBottom, 200);
+                    setTimeout(scrollToBottom, 300);
+                    setTimeout(scrollToBottom, 500);
+                    setTimeout(scrollToBottom, 800);
+                    setTimeout(scrollToBottom, 1000);
+                    setTimeout(scrollToBottom, 1500);
+                    setTimeout(scrollToBottom, 2000);
+                    
+                    // Also try scrolling after a longer delay to ensure content is fully rendered
+                    setTimeout(scrollToBottom, 3000);
+                    setTimeout(scrollToBottom, 5000);
+                    
+                    // Try to access iframe content directly after load
+                    setTimeout(() => {
+                        try {
+                            if (iframe.contentDocument && iframe.contentDocument.body) {
+                                // Try to scroll the iframe's body directly
+                                iframe.contentDocument.body.scrollTop = iframe.contentDocument.body.scrollHeight;
+                                iframe.contentDocument.documentElement.scrollTop = iframe.contentDocument.documentElement.scrollHeight;
+                                
+                                // Also try to find and scroll to the last element
+                                const lastElement = iframe.contentDocument.body.lastElementChild;
+                                if (lastElement) {
+                                    lastElement.scrollIntoView({ behavior: 'smooth', block: 'end' });
+                                }
+                            }
+                        } catch (e) {
+                            // Cross-origin restriction, continue with other methods
+                        }
+                    }, 1000);
+                });
+            }
+            
+            // Auto-scroll very frequently to keep chat at bottom
+            setInterval(scrollToBottom, 50); // Even more frequent
+            
+            // Add continuous scrolling to keep chat at bottom
+            function continuousScroll() {
+                scrollToBottom();
+                
+                // Try additional scrolling methods
+                if (iframe) {
+                    try {
+                        // Try to scroll iframe content directly
+                        if (iframe.contentDocument && iframe.contentDocument.body) {
+                            iframe.contentDocument.body.scrollTop = iframe.contentDocument.body.scrollHeight;
+                        }
+                        
+                        // Try to scroll iframe element
+                        iframe.scrollTop = iframe.scrollHeight;
+                        
+                        // Try to scroll parent container
+                        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                        
+                    } catch (e) {
+                        // Cross-origin restriction, use basic methods
+                        iframe.scrollTop = iframe.scrollHeight;
+                    }
+                }
+                
+                // Use requestAnimationFrame for smoother scrolling
+                requestAnimationFrame(() => {
+                    setTimeout(continuousScroll, 25); // Even faster
+                });
+            }
+            
+            // Start continuous scrolling immediately after iframe loads
+            if (iframe) {
+                iframe.addEventListener('load', function() {
+                    // Start continuous scrolling immediately
+                    continuousScroll();
+                    
+                    // Add scroll event listener to detect user scrolling
+                    try {
+                        if (iframe.contentWindow) {
+                            iframe.contentWindow.addEventListener('scroll', function() {
+                                // If user scrolls up, auto-scroll back to bottom after a delay
+                                setTimeout(scrollToBottom, 1000);
+                            });
+                        }
+                    } catch (e) {
+                        // Cross-origin restriction, can't add scroll listener
+                    }
+                    
+                    // Try to scroll iframe content immediately after load
+                    setTimeout(() => {
+                        try {
+                            if (iframe.contentDocument && iframe.contentDocument.body) {
+                                // Force scroll to bottom
+                                iframe.contentDocument.body.scrollTop = iframe.contentDocument.body.scrollHeight;
+                                iframe.contentDocument.documentElement.scrollTop = iframe.contentDocument.documentElement.scrollHeight;
+                                
+                                // Try to find chat container and scroll it
+                                const chatContainer = iframe.contentDocument.querySelector('.chat-container, .messages, .conversation, [class*="chat"], [class*="message"]');
+                                if (chatContainer) {
+                                    chatContainer.scrollTop = chatContainer.scrollHeight;
+                                }
+                            }
+                        } catch (e) {
+                            // Cross-origin restriction, continue with other methods
+                        }
+                    }, 500);
+                });
+            }
             
             // Toggle chatbot window
             chatbotToggle.addEventListener('click', function() {
                 if (!isOpen) {
                     chatbotWindow.style.display = 'flex';
                     isOpen = true;
+                    // Immediate auto-scroll when opening
+                    scrollToBottom();
+                    setTimeout(scrollToBottom, 50);
+                    setTimeout(scrollToBottom, 100);
+                    setTimeout(scrollToBottom, 200);
+                    setTimeout(scrollToBottom, 300);
+                    setTimeout(scrollToBottom, 500);
                 } else {
                     chatbotWindow.style.display = 'none';
                     isOpen = false;
@@ -1659,12 +1964,138 @@
                 isOpen = false;
             });
             
-            // Auto-open hint after 10 seconds
+            // Auto-open chatbot after 2 seconds
             setTimeout(() => {
                 if (!isOpen) {
-                    chatbotToggle.style.animation = 'spiky-bounce 1s infinite';
+                    chatbotWindow.style.display = 'flex';
+                    isOpen = true;
+                    // Immediate auto-scroll when auto-opening
+                    scrollToBottom();
+                    setTimeout(scrollToBottom, 50);
+                    setTimeout(scrollToBottom, 100);
+                    setTimeout(scrollToBottom, 200);
+                    setTimeout(scrollToBottom, 300);
+                    setTimeout(scrollToBottom, 500);
+                    setTimeout(scrollToBottom, 800);
+                    setTimeout(scrollToBottom, 1000);
                 }
-            }, 10000);
+            }, 2000);
+            
+            // Remove auto-open hint since chatbot opens automatically
+            // setTimeout(() => {
+            //     if (!isOpen) {
+            //         chatbotToggle.style.animation = 'spiky-bounce 1s infinite';
+            //     }
+            // }, 10000);
+            
+            // Scroll when chatbot becomes visible
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Immediate scroll when visible
+                        scrollToBottom();
+                        setTimeout(scrollToBottom, 50);
+                        setTimeout(scrollToBottom, 100);
+                        setTimeout(scrollToBottom, 200);
+                    }
+                });
+            });
+            
+            if (chatbotWindow) {
+                observer.observe(chatbotWindow);
+            }
+            
+            // Try to detect iframe content changes and auto-scroll
+            if (iframe) {
+                try {
+                    // Create a MutationObserver to watch for content changes
+                    const iframeObserver = new MutationObserver(function(mutations) {
+                        mutations.forEach(function(mutation) {
+                            if (mutation.type === 'childList' || mutation.type === 'attributes') {
+                                // Content changed, try to scroll to bottom
+                                setTimeout(scrollToBottom, 10);
+                                setTimeout(scrollToBottom, 50);
+                                setTimeout(scrollToBottom, 100);
+                                
+                                // Also try to scroll iframe content directly
+                                setTimeout(() => {
+                                    try {
+                                        if (iframe.contentDocument && iframe.contentDocument.body) {
+                                            iframe.contentDocument.body.scrollTop = iframe.contentDocument.body.scrollHeight;
+                                        }
+                                    } catch (e) {
+                                        // Cross-origin restriction
+                                    }
+                                }, 50);
+                            }
+                        });
+                    });
+                    
+                    // Try to observe the iframe content (may fail due to cross-origin)
+                    if (iframe.contentDocument) {
+                        iframeObserver.observe(iframe.contentDocument.body, {
+                            childList: true,
+                            subtree: true,
+                            attributes: true
+                        });
+                    }
+                } catch (e) {
+                    // Cross-origin restriction, can't observe iframe content
+                }
+            }
+            
+            // Add a more aggressive approach: try to scroll iframe content periodically
+            setInterval(() => {
+                if (iframe) {
+                    try {
+                        // Try to access iframe content and scroll it
+                        if (iframe.contentDocument && iframe.contentDocument.body) {
+                            iframe.contentDocument.body.scrollTop = iframe.contentDocument.body.scrollHeight;
+                            iframe.contentDocument.documentElement.scrollTop = iframe.contentDocument.documentElement.scrollHeight;
+                            
+                            // Try to find and scroll chat containers
+                            const chatElements = iframe.contentDocument.querySelectorAll('.chat-container, .messages, .conversation, [class*="chat"], [class*="message"], [class*="scroll"]');
+                            chatElements.forEach(element => {
+                                element.scrollTop = element.scrollHeight;
+                            });
+                        }
+                    } catch (e) {
+                        // Cross-origin restriction, use basic methods
+                        iframe.scrollTop = iframe.scrollHeight;
+                    }
+                }
+            }, 200);
+            
+            // Immediate scroll when page loads
+            window.addEventListener('load', function() {
+                // Instant scroll attempts
+                scrollToBottom();
+                setTimeout(scrollToBottom, 10);
+                setTimeout(scrollToBottom, 25);
+                setTimeout(scrollToBottom, 50);
+                setTimeout(scrollToBottom, 75);
+                setTimeout(scrollToBottom, 100);
+                setTimeout(scrollToBottom, 150);
+                setTimeout(scrollToBottom, 200);
+                setTimeout(scrollToBottom, 300);
+                setTimeout(scrollToBottom, 500);
+                setTimeout(scrollToBottom, 800);
+                setTimeout(scrollToBottom, 1000);
+            });
+            
+            // Also scroll when DOM is ready
+            document.addEventListener('DOMContentLoaded', function() {
+                // Immediate scroll attempts
+                setTimeout(scrollToBottom, 10);
+                setTimeout(scrollToBottom, 25);
+                setTimeout(scrollToBottom, 50);
+                setTimeout(scrollToBottom, 75);
+                setTimeout(scrollToBottom, 100);
+                setTimeout(scrollToBottom, 150);
+                setTimeout(scrollToBottom, 200);
+                setTimeout(scrollToBottom, 300);
+                setTimeout(scrollToBottom, 500);
+            });
         });
     </script>
 </body>
